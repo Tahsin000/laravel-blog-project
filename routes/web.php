@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// this is my admin route
 
-// Route::get('/', [VisitorController::class, 'HomeIndex']);
-Route::get('/visitor', [VisitorController::class, 'index']);
-
-Route::get('/', function () {
-    return view('Frontend.Home');
+Route::namespace('Admin')->prefix('admin')->group(function () {
+    Route::get('/dashboard', [VisitorController::class, 'adminDashboard']);
+    Route::get('/visitor', [VisitorController::class, 'adminIndex']);
 });
 
+Route::get('/', [VisitorController::class, 'HomeIndex']);
