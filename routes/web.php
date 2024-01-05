@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [VisitorController::class, 'HomeIndex']);
+// Route::get('/', [VisitorController::class, 'HomeIndex']);
 Route::get('/visitor', [VisitorController::class, 'index']);
+
+Route::get('/', function () {
+    return view('Frontend.Home');
+});
 

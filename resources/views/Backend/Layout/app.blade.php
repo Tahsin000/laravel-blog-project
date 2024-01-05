@@ -24,7 +24,7 @@
   
   <div class="container-scroller">
 
-    @include('Layout.sidebar')
+    @include('Backend.Layout.sidebar')
       <!-- partial -->
       <div class="main-panel ">
         <div class="content-wrapper ">
