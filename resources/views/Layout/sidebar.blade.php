@@ -57,19 +57,19 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index-2.html">
+            <a class="nav-link" href="{{url('/')}}">
               <i class="fa fa-home menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
+              <span class="menu-title">Home</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/widgets.html">
+            <a class="nav-link" href="{{url('/visitor')}}">
               <i class="fa fa-puzzle-piece menu-icon"></i>
-              <span class="menu-title">Widgets</span>
+              <span class="menu-title">Visitor</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
+            <a class="nav-link" data-toggle="collapse" href="#" aria-expanded="false" aria-controls="page-layouts">
               <i class="fab fa-trello menu-icon"></i>
               <span class="menu-title">Page Layouts</span>
               <i class="menu-arrow"></i>

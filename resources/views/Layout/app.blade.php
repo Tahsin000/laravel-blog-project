@@ -29,7 +29,7 @@
       <div class="main-panel ">
         <div class="content-wrapper ">
          
-  @yield('container')
+  @yield('content')
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
@@ -61,6 +61,7 @@
     <!-- endinject -->
     <!-- Custom js for this page-->
     <script src="{{asset('js/dashboard.js')}}"></script>
+    <script src="{{asset('js/data-table.js')}}"></script>
 </body>
 
 </html>

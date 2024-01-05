@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\VisitorModel;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class VisitorController extends Controller
 {
     function HomeIndex () {
         $UserIP = $_SERVER['REMOTE_ADDR'];
@@ -14,6 +14,11 @@ class HomeController extends Controller
         
         VisitorModel::insert(['ip_address' => $UserIP, 'visit_time' => $timeDate]);  
         return view('Home');
+    }
+
+    function index() {
+        $VisitorData =json_decode(VisitorModel::all());
+        return view('Visitor', ['VisitorData' => $VisitorData]);
     }
     //
 }

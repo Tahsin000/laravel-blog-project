@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +14,6 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'HomeIndex']);
+Route::get('/', [VisitorController::class, 'HomeIndex']);
+Route::get('/visitor', [VisitorController::class, 'index']);
 
