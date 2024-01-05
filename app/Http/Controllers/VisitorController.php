@@ -17,7 +17,7 @@ class VisitorController extends Controller
     }
 
     function index() {
-        $VisitorData =json_decode(VisitorModel::all());
+        $VisitorData =json_decode(VisitorModel::orderBy('id', 'desc')->take(3)->get());
         return view('Visitor', ['VisitorData' => $VisitorData]);
     }
     //
