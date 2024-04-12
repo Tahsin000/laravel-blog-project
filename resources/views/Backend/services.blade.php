@@ -45,8 +45,7 @@
                                     <th>Image</th>
                                     <th>Name</th>
                                     <th>Description</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody id="service_table">
@@ -91,11 +90,11 @@
                 
                 <div class="modal-body">
                     <h6>Do you really want to delete this ?</h6>
-                    <h6 id="serviceDeleteDisplayId"></h6>
+                    {{-- <h6 id="serviceDeleteDisplayId"></h6> --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">No</button>
-                    <button type="button" class="btn btn-sm btn-danger">Yes</button>
+                    <button data-id="" id="serviceDeleteBtnConfirm" type="button" class="btn btn-sm btn-danger">Yes</button>
                 </div>
             </div>
         </div>
