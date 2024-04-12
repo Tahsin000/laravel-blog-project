@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="order-listing" class="table d-none" >
+                        <table id="order-listing" class="table d-none">
                             <thead>
                                 <tr>
                                     <th>Image</th>
@@ -73,6 +73,29 @@
                         </div>
 
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {{-- modal --}}
+
+
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                
+                <div class="modal-body">
+                    <h6>Do you really want to delete this ?</h6>
+                    <h6 id="serviceDeleteDisplayId"></h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-sm btn-danger">Yes</button>
                 </div>
             </div>
         </div>

@@ -24,10 +24,19 @@ function getServicesData() {
                                 service.services_des +
                                 "</td>" +
                                 "<td><a href='' class='btn btn-outline-warning'><i class='fa fa-edit'></i></a></td>" +
-                                "<td><a href='' class='btn btn-outline-danger'><i class='fa fa-trash'></i></a></td>"
+                                "<td><a href='' data-toggle='modal' data-target='#deleteModal' data-id=" + service.id + " class='service-delete-btn btn btn-outline-danger'><i class='fa fa-trash'></i></a></td>"
                         )
                         .appendTo("#service_table");
                 });
+
+                
+                $(".service-delete-btn").click(function () {
+                    var id = $(this).data("id");
+                    $("#serviceDeleteDisplayId").html(id);
+                    $("#deleteModal").modal("show");
+                    // alert(id);
+                });
+
             } else {
                 $("#loader").addClass("d-none");
                 $("#wrongSection").removeClass("d-none");

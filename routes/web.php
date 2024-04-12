@@ -25,6 +25,8 @@ Route::namespace('Admin')->prefix('admin')->group(function () {
 
     Route::get('/get-services-data', [ServicesController::class, 'servicesData'])->name('dashboard.services');
 
+    Route::post('/services-delete', [ServicesController::class, 'servicesDelete'])->name('dashboard.services');
+
 });
 
 Route::get('/', [VisitorController::class, 'HomeIndex']);

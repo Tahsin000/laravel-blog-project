@@ -15,4 +15,10 @@ class ServicesController extends Controller
         $result = json_decode(ServicesModel::all());
         return $result;
     }
+    public function servicesDelete (Request $request) {
+        $id = $request->id;
+        $result = ServicesModel::where('id', $id)->delete();
+        $result ? 1 : 0;
+        // return redirect()->back();
+    }
 }
