@@ -56,32 +56,28 @@
               </div>
             </div>
           </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="{{url('/')}}">
               <i class="fa fa-home menu-icon"></i>
               <span class="menu-title">Home</span>
             </a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="{{url('/visitor')}}">
+            <a class="nav-link" href="{{route('dashboard.visitor')}}">
               <i class="fa fa-puzzle-piece menu-icon"></i>
               <span class="menu-title">Visitor</span>
             </a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#" aria-expanded="false" aria-controls="page-layouts">
-              <i class="fab fa-trello menu-icon"></i>
-              <span class="menu-title">Page Layouts</span>
-              <i class="menu-arrow"></i>
+            <a class="nav-link" href="{{route('dashboard.services')}}">
+              <i class="fa fa-puzzle-piece menu-icon"></i>
+              <span class="menu-title">Services</span>
             </a>
-            <div class="collapse" id="page-layouts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="pages/layout/boxed-layout.html">Boxed</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/layout/rtl-layout.html">RTL</a></li>
-                <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="pages/layout/horizontal-menu.html">Horizontal Menu</a></li>
-              </ul>
-            </div>
           </li>
+
           <li class="nav-item d-none d-lg-block">
             <a class="nav-link" data-toggle="collapse" href="#sidebar-layouts" aria-expanded="false" aria-controls="sidebar-layouts">
               <i class="fas fa-columns menu-icon"></i>

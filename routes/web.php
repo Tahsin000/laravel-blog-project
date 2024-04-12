@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::namespace('Admin')->prefix('admin')->group(function () {
     Route::get('/dashboard', [VisitorController::class, 'adminDashboard']);
-    Route::get('/visitor', [VisitorController::class, 'adminIndex']);
+
+    Route::get('/visitor', [VisitorController::class, 'adminIndex'])->name('dashboard.visitor');
+
+    Route::get('/services', [ServicesController::class, 'services'])->name('dashboard.services');
+
+    Route::get('/get-services-data', [ServicesController::class, 'servicesData'])->name('dashboard.services');
+
 });
 
 Route::get('/', [VisitorController::class, 'HomeIndex']);

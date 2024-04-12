@@ -1,3 +1,3 @@
 @extends('Frontend.Layout.app')
-@extends('Frontend.Component.HomeBanner')
-@extends('Frontend.Component.HomeService')
+@extends('Frontend.Component.home-banner')
+@extends('Frontend.Component.home-service')
