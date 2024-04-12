@@ -7,6 +7,17 @@
             height: 50px !important;
             padding: 0 !important;
         }
+
+        .loader-style {
+            height: calc(100vh - 300px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loader-style img {
+            width: 100px;
+        }
     </style>
 @endsection
 
@@ -28,7 +39,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="order-listing" class="table">
+                        <table id="order-listing" class="table d-none" >
                             <thead>
                                 <tr>
                                     <th>Image</th>
@@ -39,13 +50,7 @@
                                 </tr>
                             </thead>
                             <tbody id="service_table">
-                                {{-- @foreach ($VisitorData as $visitors)
-                <tr>
-                    <td>{{$visitors->id}}</td>
-                    <td>{{$visitors->ip_address}}</td>
-                    <td>{{$visitors->visit_time}}</td>
-                </tr>
-                @endforeach --}}
+
                                 {{-- <tr>
                                     <td class="table-img"> <img 
                                             src="https://www.redwolf.in/image/cache/catalog/stickers/tom-face-sticker-india-600x800.jpg?m=1687858270" class="img-sz" alt=""> </td>
@@ -55,8 +60,18 @@
                                     <td><a href="" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                                 </tr> --}}
 
+
                             </tbody>
+
                         </table>
+
+                        <div id="loader" class="w-100 loader-style "><img class=""
+                                src="{{ asset('images/loader.gif') }}" alt=""></div>
+
+                        <div id="wrongSection" class="w-100 loader-style d-none">
+                            <div class="display-4 text-danger">Something went wrong ... </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
