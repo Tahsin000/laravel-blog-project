@@ -1,3 +1,8 @@
+
+/**
++ * This function makes an AJAX call to the server to retrieve
++ * all the service data from the database.
+*/
 function getServicesData() {
     axios
         .get("/admin/get-services-data")
@@ -63,6 +68,14 @@ function getServicesData() {
         });
 }
 
+/**
++ * This function sends a POST request to the server to delete a
++ * service record. The request contains the service ID to be deleted.
++ * If the service is deleted successfully, it reloads the service table
++ * to reflect the change.
++ *
++ * @param {string} deleteID - The ID of the service to be deleted.
+*/
 function getServicesDelete(deleteID) {
     axios
         .post('/admin/services-delete', { id: deleteID })
@@ -71,11 +84,13 @@ function getServicesDelete(deleteID) {
                 console.log(response.data);
                 toastr.success('Delete Success');
                 $('#deleteModal').modal('hide');
-                getServicesData();
+                // TODO: Refresh the table after delete
+                $('#service_table').DataTable().ajax.reload();
             } else {
                 toastr.error('Delete Failed');
                 $('#deleteModal').modal('hide');
-                getServicesData();
+                // TODO: Refresh the table after delete
+                $('#service_table').DataTable().ajax.reload();
             }
         })
         .catch(function (error) {

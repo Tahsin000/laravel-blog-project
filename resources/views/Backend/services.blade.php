@@ -105,7 +105,7 @@
 @endsection
 @section('admin-script')
 
-    <script src="{{ asset('js/admin-script.js') }}"></script>
+    <script src="{{ asset('js/services.js') }}"></script>
     <script>
         getServicesData()
     </script>
