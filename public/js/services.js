@@ -1,17 +1,16 @@
-
 /**
-+ * This function makes an AJAX call to the server to retrieve
-+ * all the service data from the database.
-*/
+ * This function makes a GET request to the server to retrieve the
+ * services data
+ */
 function getServicesData() {
     axios
         .get("/admin/get-services-data")
         .then(function (response) {
             if (response.status) {
                 var data = response.data;
-                $('#order-listing').removeClass('d-none');
-                $('#loader').addClass('d-none');
-                $('#service_table').empty();
+                $("#order-listing").removeClass("d-none");
+                $("#loader").addClass("d-none");
+                $("#service_table").empty();
                 $.each(data, function (i, service) {
                     $("<tr>")
                         .html(
@@ -27,26 +26,27 @@ function getServicesData() {
                                 service.services_des +
                                 "</td>" +
                                 // data-toggle='modal' data-target='#deleteModal'
-                                "<td> <div> <a href='' class='btn btn-outline-warning'><i class='fa fa-edit'></i></a> <a href='' data-toggle='modal' data-id=" +
+                                "<td> <div> <a href='' data-toggle='modal' data-id=" +
+                                service.id +
+                                " class='service-edit-btn btn btn-outline-warning'><i class='fa fa-edit'></i></a> <a href='' data-toggle='modal' data-id=" +
                                 service.id +
                                 " class='service-delete-btn btn btn-outline-danger'><i class='fa fa-trash'></i></a> </div> </td>"
                         )
                         .appendTo("#service_table");
                 });
 
-                $('.service-delete-btn').click(function () {
+                $(".service-delete-btn").click(function () {
                     var id = $(this).data("id");
-                    $('#deleteModal').modal('show');
+                    $("#deleteModal").modal("show");
                     $("#serviceDeleteDisplayId").html(id);
-                    $('#serviceDeleteBtnConfirm').attr('data-id', id);
+                    $("#serviceDeleteBtnConfirm").attr("data-id", id);
                 });
 
-                $('#serviceDeleteBtnConfirm').click(function () {
-                    // var id = $(this).data('id');
-                    const id = $('#serviceDeleteDisplayId').text();
-                    $('#deleteModal').modal('hide');
-                    console.log(id);
-                    getServicesDelete(id);
+                $(".service-edit-btn").click(function () {
+                    var id = $(this).data("id");
+                    $("#editModal").modal("show");
+                    $("#serviceEditDisplayId").html(id);
+                    $("#serviceEditBtnConfirm").attr("data-id", id);
                 });
 
                 // $(".service-delete-btn").click(function () {
@@ -56,41 +56,34 @@ function getServicesData() {
                 //     alert(id);
                 // });
             } else {
-                $('#loader').addClass('d-none');
-                $('#wrongSection').removeClass('d-none');
+                $("#loader").addClass("d-none");
+                $("#wrongSection").removeClass("d-none");
             }
         })
         .catch(function (error) {
             console.log(error);
 
-            $('#loader').addClass('d-none');
-            $('#wrongSection').removeClass('d-none');
+            $("#loader").addClass("d-none");
+            $("#wrongSection").removeClass("d-none");
         });
 }
 
 /**
-+ * This function sends a POST request to the server to delete a
-+ * service record. The request contains the service ID to be deleted.
-+ * If the service is deleted successfully, it reloads the service table
-+ * to reflect the change.
-+ *
-+ * @param {string} deleteID - The ID of the service to be deleted.
-*/
+ * This function sends a POST request to the server to delete a service
+ * The function takes a single parameter which is the ID of the service to be deleted
+ */
 function getServicesDelete(deleteID) {
     axios
-        .post('/admin/services-delete', { id: deleteID })
+        .post("/admin/services-delete", { id: deleteID })
         .then(function (response) {
             if (response.data == 1) {
-                console.log(response.data);
-                toastr.success('Delete Success');
-                $('#deleteModal').modal('hide');
-                // TODO: Refresh the table after delete
-                $('#service_table').DataTable().ajax.reload();
+                getServicesData();
+                $("#deleteModal").modal("hide");
+                toastr.success("Delete Success");
             } else {
-                toastr.error('Delete Failed');
-                $('#deleteModal').modal('hide');
-                // TODO: Refresh the table after delete
-                $('#service_table').DataTable().ajax.reload();
+                getServicesData();
+                toastr.error("Delete Failed");
+                $("#deleteModal").modal("hide");
             }
         })
         .catch(function (error) {
@@ -98,3 +91,10 @@ function getServicesDelete(deleteID) {
             console.log(error);
         });
 }
+
+$("#serviceDeleteBtnConfirm").click(function () {
+    // var id = $(this).data('id');
+    const id = $("#serviceDeleteDisplayId").text();
+    $("#deleteModal").modal("hide");
+    id ? getServicesDelete(id) : '' ;
+});

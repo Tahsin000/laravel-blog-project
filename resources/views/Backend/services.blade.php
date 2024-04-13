@@ -1,8 +1,6 @@
 @extends('Backend.Layout.app')
 
 @section('admin-style')
-
-
     <style>
         .img-sz {
             width: 50px !important;
@@ -102,9 +100,35 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-5">
+                    <h6 id="serviceEditDisplayId"></h6>
+                    <input type="text" class="form-control mb-4" id="" placeholder="Service name">
+
+                    <input type="text" class="form-control mb-4" id="" placeholder="Service description">
+
+                    <input type="text" class="form-control mb-4" id="" placeholder="Service image link">
+                </div>
+
+                {{-- <div class="modal-body">
+                    <h6 id="serviceEditDisplayId"></h6>
+                    <h6>Do you really want to delete this ?</h6>
+                </div> --}}
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Cancel</button>
+                    <button data-id="" id="serviceEditBtnConfirm" type="button"
+                        class="btn btn-sm btn-success">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('admin-script')
-
     <script src="{{ asset('js/services.js') }}"></script>
     <script>
         getServicesData()
