@@ -18,7 +18,7 @@ class ServicesController extends Controller
     public function servicesDelete (Request $request) {
         $id = $request->id;
         $result = ServicesModel::where('id', $id)->delete();
-        $result ? 1 : 0;
+        return $result ? 1 : 0;
         // return redirect()->back();
     }
 }

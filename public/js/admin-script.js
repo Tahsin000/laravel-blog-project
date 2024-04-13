@@ -4,8 +4,9 @@ function getServicesData() {
         .then(function (response) {
             if (response.status) {
                 var data = response.data;
-                $("#order-listing").removeClass("d-none");
-                $("#loader").addClass("d-none");
+                $('#order-listing').removeClass('d-none');
+                $('#loader').addClass('d-none');
+                $('#service_table').empty();
                 $.each(data, function (i, service) {
                     $("<tr>")
                         .html(
@@ -20,21 +21,26 @@ function getServicesData() {
                                 "<td>" +
                                 service.services_des +
                                 "</td>" +
-                                "<td> <div> <a href='' class='btn btn-outline-warning'><i class='fa fa-edit'></i></a> <a href='' data-toggle='modal' data-target='#deleteModal' data-id=" +
+                                // data-toggle='modal' data-target='#deleteModal'
+                                "<td> <div> <a href='' class='btn btn-outline-warning'><i class='fa fa-edit'></i></a> <a href='' data-toggle='modal' data-id=" +
                                 service.id +
                                 " class='service-delete-btn btn btn-outline-danger'><i class='fa fa-trash'></i></a> </div> </td>"
                         )
                         .appendTo("#service_table");
                 });
 
-                $(".service-delete-btn").click(function () {
+                $('.service-delete-btn').click(function () {
                     var id = $(this).data("id");
-                    $("#serviceDeleteBtnConfirm").attr("data-id", id);
-                    $("#deleteModal").modal("hide");
+                    $('#deleteModal').modal('show');
+                    $("#serviceDeleteDisplayId").html(id);
+                    $('#serviceDeleteBtnConfirm').attr('data-id', id);
                 });
 
-                $("#serviceDeleteBtnConfirm").click(function () {
-                    var id = $(this).data("id");
+                $('#serviceDeleteBtnConfirm').click(function () {
+                    // var id = $(this).data('id');
+                    const id = $('#serviceDeleteDisplayId').text();
+                    $('#deleteModal').modal('hide');
+                    console.log(id);
                     getServicesDelete(id);
                 });
 
@@ -45,30 +51,35 @@ function getServicesData() {
                 //     alert(id);
                 // });
             } else {
-                $("#loader").addClass("d-none");
-                $("#wrongSection").removeClass("d-none");
+                $('#loader').addClass('d-none');
+                $('#wrongSection').removeClass('d-none');
             }
         })
         .catch(function (error) {
             console.log(error);
 
-            $("#loader").addClass("d-none");
-            $("#wrongSection").removeClass("d-none");
+            $('#loader').addClass('d-none');
+            $('#wrongSection').removeClass('d-none');
         });
 }
 
 function getServicesDelete(deleteID) {
     axios
-        .post("/admin/services-delete", { id: deleteID })
+        .post('/admin/services-delete', { id: deleteID })
         .then(function (response) {
-            if (response.status) {
+            if (response.data == 1) {
+                console.log(response.data);
+                toastr.success('Delete Success');
+                $('#deleteModal').modal('hide');
                 getServicesData();
-                alert("Success");
             } else {
-                alert("Failed");
+                toastr.error('Delete Failed');
+                $('#deleteModal').modal('hide');
+                getServicesData();
             }
         })
         .catch(function (error) {
+            toastr.error('Internal server error');
             console.log(error);
         });
 }

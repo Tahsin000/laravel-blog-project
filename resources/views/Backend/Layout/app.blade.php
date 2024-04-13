@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('fonts/font-awesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('css/vendor.bundle.addons.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
     <!-- endinject -->
     <!-- plugin css for this page -->
     <!-- End plugin css for this page -->
@@ -54,11 +55,11 @@
     <script src="{{ asset('js/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset('js/vendor.bundle.addons.js') }}"></script>
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
-        
+
     <!-- endinject -->
-        <!-- Plugin js for this page-->
-        <!-- End plugin js for this page-->
-        <!-- inject:js -->
+    <!-- Plugin js for this page-->
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
 
     <script src="{{ asset('js/off-canvas.js') }}"></script>
     <script src="{{ asset('js/hoverable-collapse.js') }}"></script>
@@ -69,6 +70,8 @@
     <!-- Custom js for this page-->
     <script src="{{ asset('js/dashboard.js') }}"></script>
     <script src="{{ asset('js/data-table.js') }}"></script>
+    <script src="{{ asset('js/mdb.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
 
 

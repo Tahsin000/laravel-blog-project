@@ -1,6 +1,8 @@
 @extends('Backend.Layout.app')
 
 @section('admin-style')
+
+
     <style>
         .img-sz {
             width: 50px !important;
@@ -87,20 +89,22 @@
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                
+
                 <div class="modal-body">
                     <h6>Do you really want to delete this ?</h6>
-                    {{-- <h6 id="serviceDeleteDisplayId"></h6> --}}
+                    <h6 id="serviceDeleteDisplayId"></h6>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">No</button>
-                    <button data-id="" id="serviceDeleteBtnConfirm" type="button" class="btn btn-sm btn-danger">Yes</button>
+                    <button data-id="" id="serviceDeleteBtnConfirm" type="button"
+                        class="btn btn-sm btn-danger">Yes</button>
                 </div>
             </div>
         </div>
     </div>
 @endsection
 @section('admin-script')
+
     <script src="{{ asset('js/admin-script.js') }}"></script>
     <script>
         getServicesData()

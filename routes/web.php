@@ -16,16 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 // this is my admin route
 
-Route::namespace('Admin')->prefix('admin')->group(function () {
+Route::namespace('admin')->prefix('admin')->group(function () {
     Route::get('/dashboard', [VisitorController::class, 'adminDashboard']);
 
     Route::get('/visitor', [VisitorController::class, 'adminIndex'])->name('dashboard.visitor');
 
     Route::get('/services', [ServicesController::class, 'services'])->name('dashboard.services');
 
-    Route::get('/get-services-data', [ServicesController::class, 'servicesData'])->name('dashboard.services');
+    Route::get('/get-services-data', [ServicesController::class, 'servicesData'])->name('dashboard.servicesData');
 
-    Route::post('/services-delete', [ServicesController::class, 'servicesDelete'])->name('dashboard.services');
+    Route::post('/services-delete', [ServicesController::class, 'servicesDelete'])->name('dashboard.servicesDelete');
 
 });
 
