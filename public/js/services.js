@@ -87,7 +87,7 @@ function getServicesDelete(deleteID) {
             }
         })
         .catch(function (error) {
-            toastr.error('Internal server error');
+            toastr.error("Internal server error");
             console.log(error);
         });
 }
@@ -96,5 +96,17 @@ $("#serviceDeleteBtnConfirm").click(function () {
     // var id = $(this).data('id');
     const id = $("#serviceDeleteDisplayId").text();
     $("#deleteModal").modal("hide");
-    id ? getServicesDelete(id) : '' ;
+    id ? getServicesDelete(id) : "";
 });
+
+function getServicesDetails(deleteID) {
+    axios
+        .post("/admin/services-details", { id: deleteID })
+        .then(function (response) {
+            
+        })
+        .catch(function (error) {
+            toastr.error("Internal server error");
+            console.log(error);
+        });
+}
