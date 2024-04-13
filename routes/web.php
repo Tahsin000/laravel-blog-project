@@ -25,7 +25,7 @@ Route::namespace('admin')->prefix('admin')->group(function () {
 
     Route::get('/get-services-data', [ServicesController::class, 'servicesData'])->name('dashboard.servicesData');
 
-    Route::post('/services-details', [ServicesController::class, 'servicesDetails'])->name('dashboard.servicesDetails');
+    Route::post('/services-update-details', [ServicesController::class, 'servicesUpdateDetails'])->name('dashboard.servicesDetails');
 
     Route::post('/services-delete', [ServicesController::class, 'servicesDelete'])->name('dashboard.servicesDelete');
 

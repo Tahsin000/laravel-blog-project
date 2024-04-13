@@ -106,14 +106,23 @@
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-body p-5">
+                <div id="editModalBody" class="modal-body p-5 d-none">
                     <h6 id="serviceEditDisplayId"></h6>
-                    <input type="text" class="form-control mb-4" id="" placeholder="Service name">
+                    <input type="text" id="serviceEditName" class="form-control mb-4" id=""
+                        placeholder="Service name">
 
-                    <input type="text" class="form-control mb-4" id="" placeholder="Service description">
+                    <input type="text" id="serviceEditDes" class="form-control mb-4" id=""
+                        placeholder="Service description">
 
-                    <input type="text" class="form-control mb-4" id="" placeholder="Service image link">
+                    <input type="text" id="serviceEditImg" class="form-control mb-4" id=""
+                        placeholder="Service image link">
+
                 </div>
+                <div class="d-flex justify-content-center">
+                    <img id="serviceEditLoader" class="w-25 m-5" src="{{ asset('images/loader.gif') }}" alt="">
+
+                </div>
+                <h5 id="serviceEditError" class="text-danger text-center d-none">something went wrong</h5>
 
                 {{-- <div class="modal-body">
                     <h6 id="serviceEditDisplayId"></h6>

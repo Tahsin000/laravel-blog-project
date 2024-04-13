@@ -46,6 +46,7 @@ function getServicesData() {
                     var id = $(this).data("id");
                     $("#editModal").modal("show");
                     $("#serviceEditDisplayId").html(id);
+                    getServicesUpdateDetails(id);
                     $("#serviceEditBtnConfirm").attr("data-id", id);
                 });
 
@@ -99,12 +100,22 @@ $("#serviceDeleteBtnConfirm").click(function () {
     id ? getServicesDelete(id) : "";
 });
 
-function getServicesDetails(deleteID) {
+function getServicesUpdateDetails(deleteID) {
     axios
-        .post("/admin/services-details", { id: deleteID })
+        .post("/admin/services-update-details", { id: deleteID })
         .then(function (response) {
-            
-        })
+            if(response.status){
+                var data = response.data;
+                $('#editModalBody').removeClass('d-none');
+                $('#serviceEditLoader').addClass('d-none');
+                $("#serviceEditName").val(data[0]?.services_name);
+                $("#serviceEditDes").val(data[0]?.services_des);
+                $("#serviceEditImg").val(data[0]?.services_img);
+            } else {
+                $('#serviceEditLoader').removeClass('d-none');
+                $('#serviceEditError').addClass('d-none');
+            }
+        })  
         .catch(function (error) {
             toastr.error("Internal server error");
             console.log(error);
