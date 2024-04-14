@@ -123,26 +123,37 @@ function getServicesDetails(updateID) {
 }
 
 function servicesUpdate(updateID, data) {
-    axios
-        .post("/admin/services-update", {
-            id: updateID,
-            services_name: data?.name,
-            services_des: data?.des,
-            services_img: data?.img,
-        })
-        .then(function (response) {
-            if (response.data) {
-                $("#editModal").modal("hide");
-                getServicesData();
-                toastr.success("Update successfully");
-            } else {
-                toastr.error("Update error");
-            }
-        })
-        .catch(function (error) {
-            toastr.error("Internal server error");
-            console.log(error);
-        });
+    if (data.name == 0) {
+        toastr.error("service name is required");
+    } else if (data.des == 0) {
+        toastr.error("service description is required");
+        // toastr.error("Please enter service description");
+    } else if (data.img == 0) {
+        toastr.error("service image is required");
+        // toastr.error("Please enter service image");
+    } else {
+        axios
+            .post("/admin/services-update", {
+                id: updateID,
+                services_name: data?.name,
+                services_des: data?.des,
+                services_img: data?.img,
+            })
+            .then(function (response) {
+                if (response.data) {
+                    $("#editModal").modal("hide");
+                    getServicesData();
+                    toastr.success("Update successfully");
+                } else {
+                    $("#editModal").modal("hide");
+                    toastr.error("Update error");
+                }
+            })
+            .catch(function (error) {
+                toastr.error("Internal server error");
+                console.log(error);
+            });
+    }
 }
 
 $("#serviceEditBtnConfirm").click(function () {
