@@ -25,10 +25,16 @@ class ServicesController extends Controller
         // return redirect()->back();
     }
 
-    public function servicesUpdateDetails(Request $request)
-    {   
+    public function servicesDetails(Request $request)
+    {
         $id = $request->id;
         $result = json_decode(ServicesModel::where('id', $id)->get());
         return $result;
+    }
+
+    public function servicesUpdate(Request $request)
+    {
+        $data = $request->only(['id', 'services_name', 'services_des', 'services_img']);
+        return ServicesModel::where('id', $data['id'])->update($data) !== false;
     }
 }

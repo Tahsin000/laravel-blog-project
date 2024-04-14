@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Route;
 // this is my admin route
 
 Route::namespace('admin')->prefix('admin')->group(function () {
-    Route::get('/dashboard', [VisitorController::class, 'adminDashboard']);
+    Route::get('/', function () {
+        return redirect()->route('admin.dashboard');
+    });
+
+    Route::get('/dashboard', [VisitorController::class, 'adminDashboard'])->name('admin.dashboard');
 
     Route::get('/visitor', [VisitorController::class, 'adminIndex'])->name('dashboard.visitor');
 
@@ -25,10 +29,11 @@ Route::namespace('admin')->prefix('admin')->group(function () {
 
     Route::get('/get-services-data', [ServicesController::class, 'servicesData'])->name('dashboard.servicesData');
 
-    Route::post('/services-update-details', [ServicesController::class, 'servicesUpdateDetails'])->name('dashboard.servicesDetails');
+    Route::post('/services-details', [ServicesController::class, 'servicesDetails'])->name('dashboard.servicesDetails');
 
     Route::post('/services-delete', [ServicesController::class, 'servicesDelete'])->name('dashboard.servicesDelete');
 
+    Route::post('/services-update', [ServicesController::class, 'servicesUpdate'])->name('dashboard.servicesDelete');
 });
 
 Route::get('/', [VisitorController::class, 'HomeIndex']);

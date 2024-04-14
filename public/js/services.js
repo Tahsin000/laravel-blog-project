@@ -46,7 +46,7 @@ function getServicesData() {
                     var id = $(this).data("id");
                     $("#editModal").modal("show");
                     $("#serviceEditDisplayId").html(id);
-                    getServicesUpdateDetails(id);
+                    getServicesDetails(id);
                     $("#serviceEditBtnConfirm").attr("data-id", id);
                 });
 
@@ -100,24 +100,59 @@ $("#serviceDeleteBtnConfirm").click(function () {
     id ? getServicesDelete(id) : "";
 });
 
-function getServicesUpdateDetails(deleteID) {
+function getServicesDetails(updateID) {
     axios
-        .post("/admin/services-update-details", { id: deleteID })
+        .post("/admin/services-details", { id: updateID })
         .then(function (response) {
-            if(response.status){
+            if (response.data) {
                 var data = response.data;
-                $('#editModalBody').removeClass('d-none');
-                $('#serviceEditLoader').addClass('d-none');
+                $("#editModalBody").removeClass("d-none");
+                $("#serviceEditLoader").addClass("d-none");
                 $("#serviceEditName").val(data[0]?.services_name);
                 $("#serviceEditDes").val(data[0]?.services_des);
                 $("#serviceEditImg").val(data[0]?.services_img);
             } else {
-                $('#serviceEditLoader').removeClass('d-none');
-                $('#serviceEditError').addClass('d-none');
+                $("#serviceEditLoader").removeClass("d-none");
+                $("#serviceEditError").addClass("d-none");
             }
-        })  
+        })
         .catch(function (error) {
             toastr.error("Internal server error");
             console.log(error);
         });
 }
+
+function servicesUpdate(updateID, data) {
+    axios
+        .post("/admin/services-update", {
+            id: updateID,
+            services_name: data?.name,
+            services_des: data?.des,
+            services_img: data?.img,
+        })
+        .then(function (response) {
+            if (response.data) {
+                $("#editModal").modal("hide");
+                getServicesData();
+                toastr.success("Update successfully");
+            } else {
+                toastr.error("Update error");
+            }
+        })
+        .catch(function (error) {
+            toastr.error("Internal server error");
+            console.log(error);
+        });
+}
+
+$("#serviceEditBtnConfirm").click(function () {
+    // var id = $(this).data('id');
+    const id = $("#serviceEditDisplayId").text();
+    id
+        ? servicesUpdate(id, {
+              name: $("#serviceEditName").val(),
+              des: $("#serviceEditDes").val(),
+              img: $("#serviceEditImg").val(),
+          })
+        : "";
+});
