@@ -49,7 +49,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Services table</li>
+                <li class="breadcrumb-item active" aria-current="page">Courses table</li>
             </ol>
         </nav>
     </div>
@@ -57,9 +57,9 @@
         <div class="card-body ">
             <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-primary addServiceModal" >Add</button>
+                    <button class="btn btn-primary addCourseModal">Add</button>
                     <div class="table-responsive">
-                        <table id="order-listing" class="table">
+                        <table id="order-listing" class="table d-none">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -118,11 +118,11 @@
 
                 <div class="modal-body">
                     <h6>Do you really want to delete this ?</h6>
-                    <h6 id="serviceDeleteDisplayId"></h6>
+                    <h6 id="courseDeleteDisplayId"></h6>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">No</button>
-                    <button data-id="" id="serviceDeleteBtnConfirm" type="button"
+                    <button data-id="" id="courseDeleteBtnConfirm" type="button"
                         class="btn btn-sm btn-danger">Yes</button>
                 </div>
             </div>
@@ -135,30 +135,42 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div id="editModalBody" class="modal-body p-5 d-none">
-                    <h6 id="serviceEditDisplayId"></h6>
-                    <input type="text" id="serviceEditName" class="form-control mb-4" id=""
-                        placeholder="Service name">
+                    <h6 id="courseEditDisplayId"></h6>
+                    <input type="text" id="courseEditName" class="form-control mb-4" id=""
+                        placeholder="Course name">
 
-                    <input type="text" id="serviceEditDes" class="form-control mb-4" id=""
-                        placeholder="Service description">
+                    <input type="text" id="courseEditDes" class="form-control mb-4" id=""
+                        placeholder="Course description">
 
-                    <input type="text" id="serviceEditImg" class="form-control mb-4" id=""
-                        placeholder="Service image link">
+                    <input type="text" id="courseEditFee" class="form-control mb-4" id=""
+                        placeholder="Course fee">
+
+                    <input type="text" id="courseEditTotalEnroll" class="form-control mb-4" id=""
+                        placeholder="Course total enroll">
+
+                    <input type="text" id="courseEditTotalClass" class="form-control mb-4" id=""
+                        placeholder="Course total class">
+
+                    <input type="text" id="courseEditLink" class="form-control mb-4" id=""
+                        placeholder="Course link">
+
+                    <input type="text" id="courseEditImg" class="form-control mb-4" id=""
+                        placeholder="Course image link">
 
                 </div>
                 <div class="d-flex justify-content-center">
-                    <img id="serviceEditLoader" class="w-25 m-5" src="{{ asset('images/loader.gif') }}" alt="">
+                    <img id="courseEditLoader" class="w-25 m-5" src="{{ asset('images/loader.gif') }}" alt="">
 
                 </div>
-                <h5 id="serviceEditError" class="text-danger text-center d-none">something went wrong</h5>
+                <h5 id="courseEditError" class="text-danger text-center d-none">something went wrong</h5>
 
                 {{-- <div class="modal-body">
-                    <h6 id="serviceEditDisplayId"></h6>
+                    <h6 id="courseEditDisplayId"></h6>
                     <h6>Do you really want to delete this ?</h6>
                 </div> --}}
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Cancel</button>
-                    <button data-id="" id="serviceEditBtnConfirm" type="button"
+                    <button data-id="" id="courseEditBtnConfirm" type="button"
                         class="btn btn-sm btn-success">Save</button>
                 </div>
             </div>
@@ -171,25 +183,72 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add new service</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add new course</h5>
                 </div>
 
                 <div id="addNewModalBody" class="modal-body p-5">
-                    <input type="text" id="serviceAddNewName" class="form-control mb-4" id=""
-                        placeholder="Service name">
+                    <input type="text" id="courseAddNewName" class="form-control mb-4" placeholder="Course name">
 
-                    <input type="text" id="serviceAddNewDes" class="form-control mb-4" id=""
-                        placeholder="Service description">
+                    <input type="text" id="courseAddNewDes" class="form-control mb-4"
+                        placeholder="Course description">
 
-                    <input type="text" id="serviceAddNewImg" class="form-control mb-4" id=""
-                        placeholder="Service image link">
+                    <input type="text" id="courseAddNewFee" class="form-control mb-4" placeholder="Course fee">
+
+                    <input type="text" id="courseAddNewTotalEnroll" class="form-control mb-4"
+                        placeholder="Course total enroll">
+
+                    <input type="text" id="courseAddNewTotalClass" class="form-control mb-4"
+                        placeholder="Course total class">
+
+                    <input type="text" id="courseAddNewLink" class="form-control mb-4" placeholder="Course link">
+
+                    <input type="text" id="courseAddNewImg" class="form-control mb-4"
+                        placeholder="Course image link">
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Cancel</button>
-                    <button data-id="" id="serviceAddNewBtnConfirm" type="button"
+                    <button data-id="" id="courseAddNewBtnConfirm" type="button"
                         class="btn btn-sm btn-success">Save</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="coursePreviewModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="exampleModalLabel">Add new course</h5>
+                </div>
+
+                <div id="coursePreviewModalBody" class="modal-body p-5 d-none">
+                    <h6 id="coursePreviewDisplayId"></h6>
+
+                    <p type="text" id="coursePreviewName" class="form-control mb-4"></p>
+
+                    <p type="text" id="coursePreviewDes" class="form-control mb-4"></p>
+
+                    <p type="text" id="coursePreviewFee" class="form-control mb-4"></p>
+
+                    <p type="text" id="coursePreviewTotalEnroll" class="form-control mb-4"></p>
+
+                    <p type="text" id="coursePreviewTotalClass" class="form-control mb-4"></p>
+
+                    <p type="text" id="coursePreviewLink" class="form-control mb-4"></p>
+
+                    <p type="text" id="coursePreviewImg" class="form-control mb-4"></p>
+
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <img id="coursePreviewLoader" class="w-25 m-5" src="{{ asset('images/loader.gif') }}"
+                        alt="">
+
+                </div>
+                <h5 id="coursePreviewError" class="text-danger text-center d-none">something went wrong</h5>
             </div>
         </div>
     </div>

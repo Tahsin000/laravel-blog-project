@@ -47,7 +47,7 @@ Route::namespace('admin')->prefix('admin')->group(function () {
     
     Route::get('/get-course-data', [CourseController::class,'getCourseData'])->name('dashboard.get-course-data');
     
-    Route::get('/course-details', [CourseController::class,'courseDetails'])->name('dashboard.course-details');
+    Route::post('/course-details', [CourseController::class,'courseDetails'])->name('dashboard.course-details');
 
     Route::post('/course-delete', [CourseController::class, 'courseDelete'])->name('dashboard.course-delete');
 

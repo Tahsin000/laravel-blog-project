@@ -189,14 +189,14 @@ $("#serviceAddNewBtnConfirm").click(function () {
         des: $("#serviceAddNewDes").val(),
         img: $("#serviceAddNewImg").val(),
     };
-    insertServicesData(data);
+    insertCoursesData(data);
 });
 
 $(".addServiceModal").click(function () {
     $("#addNewModal").modal("show");
 });
 
-function insertServicesData(data) {
+function insertCoursesData(data) {
     const { name, des, img } = data;
     if (name == 0) {
         toastr.error("service name is required");

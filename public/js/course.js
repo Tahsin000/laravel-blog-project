@@ -1,6 +1,6 @@
 /**
  * This function makes a GET request to the server to retrieve the
- * services data
+ * courses data
  */
 function getCoursesData() {
     axios
@@ -19,11 +19,15 @@ function getCoursesData() {
                             <td>${course.course_fee}</td>
                             <td>${course.course_totalclass}</td>
                             <td>${course.course_totalenroll}</td>
-                            <td><a href="" class="btn btn-outline-success"><i class="fa fa-eye"></i></a></td>
+                            <td>
+                            
+                            <a href="" data-id="${course.id}" data-toggle='modal' class="course-preview-btn btn btn-outline-success"><i class="fa fa-eye"></i></a>
+
+                            </td>
                             <td>
                                 <div class="">
-                                    <a href="" class="btn btn-outline-warning"><i class="fa fa-edit"></i></a>
-                                    <a href="" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="" data-id="${course.id}" data-toggle='modal' class="course-edit-btn btn btn-outline-warning"><i class="fa fa-edit"></i></a>
+                                    <a href="" data-id="${course.id}" data-toggle='modal' class="course-delete-btn btn btn-outline-danger"><i class="fa fa-trash"></i></a>
                                 </div>
                             </td>
   
@@ -32,25 +36,32 @@ function getCoursesData() {
                         .appendTo("#course_table");
                 });
 
-                $(".service-delete-btn").click(function () {
+                $(".course-delete-btn").click(function () {
                     var id = $(this).data("id");
                     $("#deleteModal").modal("show");
-                    $("#serviceDeleteDisplayId").html(id);
-                    $("#serviceDeleteBtnConfirm").attr("data-id", id);
+                    $("#courseDeleteDisplayId").html(id);
+                    $("#courseDeleteBtnConfirm").attr("data-id", id);
                 });
 
-                $(".service-edit-btn").click(function () {
+                $(".course-edit-btn").click(function () {
                     var id = $(this).data("id");
                     $("#editModal").modal("show");
-                    $("#serviceEditDisplayId").html(id);
-                    getServicesDetails(id);
-                    $("#serviceEditBtnConfirm").attr("data-id", id);
+                    $("#coursePreviewDisplayId").html(id);
+                    getCoursesPreview(id);
                 });
 
-                // $(".service-delete-btn").click(function () {
+                $(".course-preview-btn").click(function () {
+                    var id = $(this).data("id");
+                    $("#coursePreviewModal").modal("show");
+                    $("#courseEditDisplayId").html(id);
+                    getCoursesDetails(id);
+                    $("#courseEditBtnConfirm").attr("data-id", id);
+                });
+
+                // $(".course-delete-btn").click(function () {
                 //     $("#deleteModal").modal("show");
                 //     var id = $(this).data("id");
-                //     $("#serviceDeleteDisplayId").html(id);
+                //     $("#courseDeleteDisplayId").html(id);
                 //     alert(id);
                 // });
             } else {
@@ -67,16 +78,16 @@ function getCoursesData() {
 }
 
 /**
- * This function sends a POST request to the server to delete a service
- * The function takes a single parameter which is the ID of the service to be deleted
+ * This function sends a POST request to the server to delete a course
+ * The function takes a single parameter which is the ID of the course to be deleted
  */
-function getServicesDelete(deleteID) {
+function getCoursesDelete(deleteID) {
     // <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-    $("#serviceDeleteBtnConfirm").html("<div class='spinner'></div>");
+    $("#courseDeleteBtnConfirm").html("<div class='spinner'></div>");
     axios
         .post("/admin/course-delete", { id: deleteID })
         .then(function (response) {
-            $("#serviceDeleteBtnConfirm").html("Yes");
+            $("#courseDeleteBtnConfirm").html("Yes");
             if (response.status == 200) {
                 if (response.data == 1) {
                     getCoursesData();
@@ -99,27 +110,74 @@ function getServicesDelete(deleteID) {
         });
 }
 
-$("#serviceDeleteBtnConfirm").click(function () {
+$("#courseDeleteBtnConfirm").click(function () {
     // var id = $(this).data('id');
-    const id = $("#serviceDeleteDisplayId").text();
+    const id = $("#courseDeleteDisplayId").text();
     // $("#deleteModal").modal("hide");
-    id ? getServicesDelete(id) : "";
+    id ? getCoursesDelete(id) : "";
 });
 
-function getServicesDetails(updateID) {
+function getCoursesPreview(updateID) {
     axios
         .post("/admin/course-details", { id: updateID })
         .then(function (response) {
-            if (response.data) {
-                var data = response.data;
-                $("#editModalBody").removeClass("d-none");
-                $("#serviceEditLoader").addClass("d-none");
-                $("#serviceEditName").val(data[0]?.services_name);
-                $("#serviceEditDes").val(data[0]?.services_des);
-                $("#serviceEditImg").val(data[0]?.services_img);
+            if (response.status == 200) {
+                if (response.data) {
+                    var data = response.data;
+                    $("#coursePreviewModalBody").removeClass("d-none");
+                    $("#coursePreviewLoader").addClass("d-none");
+                    $("#coursePreviewName").text(data[0]?.course_name);
+                    $("#coursePreviewDes").text(data[0]?.course_des);
+                    $("#coursePreviewFee").text(data[0]?.course_fee);
+                    $("#coursePreviewTotalEnroll").text(
+                        data[0]?.course_totalenroll
+                    );
+                    $("#coursePreviewTotalClass").text(
+                        data[0]?.course_totalclass
+                    );
+                    $("#coursePreviewLink").text(data[0]?.course_link);
+                    $("#coursePreviewImg").text(data[0]?.course_img);
+                    $("#coursePreviewModal").modal("hide");
+                } else {
+                    $("#coursePreviewModal").modal("hide");
+                    toastr.error("Update error");
+                }
             } else {
-                $("#serviceEditLoader").removeClass("d-none");
-                $("#serviceEditError").addClass("d-none");
+                $("#coursePreviewModal").modal("hide");
+                toastr.error("Some thing went wrong");
+            }
+        })
+        .catch(function (error) {
+            $("#coursePreviewModal").modal("hide");
+            toastr.error("Internal server error");
+            console.log(error);
+        });
+}
+
+function getCoursesDetails(updateID) {
+    axios
+        .post("/admin/course-details", { id: updateID })
+        .then(function (response) {
+            if (response.status == 200) {
+                if (response.data) {
+                    var data = response.data;
+                    $("#editModalBody").removeClass("d-none");
+                    $("#courseEditLoader").addClass("d-none");
+                    $("#courseEditName").val(data[0].course_name);
+                    $("#courseEditDes").val(data[0].course_des);
+                    $("#courseEditFee").val(data[0]?.course_fee);
+                    $("#courseEditTotalEnroll").val(data[0].course_totalenroll);
+                    $("#courseEditTotalClass").val(data[0].course_totalclass);
+                    $("#courseEditLink").val(data[0]?.course_link);
+                    $("#courseEditImg").val(data[0]?.course_img);
+                    $("#editModal").modal("hide");
+                } else {
+                    $("#editModal").modal("hide");
+                    toastr.error("Data get error");
+                }
+            } else {
+                $("#editModal").modal("hide");
+                toastr.error("Some thing went wrong");
             }
         })
         .catch(function (error) {
@@ -129,26 +187,30 @@ function getServicesDetails(updateID) {
         });
 }
 
-function servicesUpdate(updateID, data) {
+function coursesUpdate(updateID, data) {
     if (data.name == 0) {
-        toastr.error("service name is required");
+        toastr.error("course name is required");
     } else if (data.des == 0) {
-        toastr.error("service description is required");
-        // toastr.error("Please enter service description");
+        toastr.error("course description is required");
+        // toastr.error("Please enter course description");
     } else if (data.img == 0) {
-        toastr.error("service image is required");
-        // toastr.error("Please enter service image");
+        toastr.error("course image is required");
+        // toastr.error("Please enter course image");
     } else {
-        $("#serviceEditBtnConfirm").html("<div class='spinner'></div>");
+        $("#courseEditBtnConfirm").html("<div class='spinner'></div>");
         axios
             .post("/admin/course-update", {
                 id: updateID,
-                services_name: data?.name,
-                services_des: data?.des,
-                services_img: data?.img,
+                course_name: data?.name,
+                course_des: data?.des,
+                course_fee: data?.fee,
+                course_totalenroll: data?.totalEnroll,
+                course_totalclass: data?.totalClass,
+                course_link: data?.link,
+                course_img: data?.img,
             })
             .then(function (response) {
-                $("#serviceEditBtnConfirm").html("Save");
+                $("#courseEditBtnConfirm").html("Save");
                 if (response.status == 200) {
                     if (response.data) {
                         $("#editModal").modal("hide");
@@ -171,51 +233,69 @@ function servicesUpdate(updateID, data) {
     }
 }
 
-$("#serviceEditBtnConfirm").click(function () {
+$("#courseEditBtnConfirm").click(function () {
     // var id = $(this).data('id');
-    const id = $("#serviceEditDisplayId").text();
+    const id = $("#courseEditDisplayId").text();
     id
-        ? servicesUpdate(id, {
-              name: $("#serviceEditName").val(),
-              des: $("#serviceEditDes").val(),
-              img: $("#serviceEditImg").val(),
+        ? coursesUpdate(id, {
+              name: $("#courseEditName").val(),
+              des: $("#courseEditDes").val(),
+              fee: $("#courseEditFee").val(),
+              totalEnroll: $("#courseEditTotalEnroll").val(),
+              totalClass: $("#courseEditTotalClass").val(),
+              link: $("#courseEditLink").val(),
+              img: $("#courseEditImg").val(),
           })
         : "";
 });
 
-$("#serviceAddNewBtnConfirm").click(function () {
+$("#courseAddNewBtnConfirm").click(function () {
     const data = {
-        name: $("#serviceAddNewName").val(),
-        des: $("#serviceAddNewDes").val(),
-        img: $("#serviceAddNewImg").val(),
+        name: $("#courseAddNewName").val(),
+        des: $("#courseAddNewDes").val(),
+        fee: $("#courseAddNewFee").val(),
+        totalEnroll: $("#courseAddNewTotalEnroll").val(),
+        totalClass: $("#courseAddNewTotalClass").val(),
+        link: $("#courseAddNewLink").val(),
+        img: $("#courseAddNewImg").val(),
     };
-    insertServicesData(data);
+    insertCoursesData(data);
 });
 
-$(".addServiceModal").click(function () {
+$(".addCourseModal").click(function () {
     $("#addNewModal").modal("show");
 });
 
-function insertServicesData(data) {
-    const { name, des, img } = data;
+function insertCoursesData(data) {
+    const { name, des, img, fee, totalEnroll, totalClass, link } = data;
     if (name == 0) {
-        toastr.error("service name is required");
+        toastr.error("course name is required");
     } else if (des == 0) {
-        toastr.error("service description is required");
-        // toastr.error("Please enter service description");
+        toastr.error("course description is required");
     } else if (img == 0) {
-        toastr.error("service image is required");
-        // toastr.error("Please enter service image");
+        toastr.error("course image is required");
+    } else if (fee == 0) {
+        toastr.error("course fee is required");
+    } else if (totalEnroll == 0) {
+        toastr.error("course total enroll is required");
+    } else if (totalClass == 0) {
+        toastr.error("course total class is required");
+    } else if (link == 0) {
+        toastr.error("course link is required");
     } else {
-        $("#serviceAddNewBtnConfirm").html("<div class='spinner'></div>");
+        $("#courseAddNewBtnConfirm").html("<div class='spinner'></div>");
         axios
             .post("/admin/course-add-new", {
-                services_name: name,
-                services_des: des,
-                services_img: img,
+                course_name: data?.name,
+                course_des: data?.des,
+                course_fee: data?.fee,
+                course_totalenroll: data?.totalEnroll,
+                course_totalclass: data?.totalClass,
+                course_link: data?.link,
+                course_img: data?.img,
             })
             .then(function (response) {
-                $("#serviceAddNewBtnConfirm").html("Save");
+                $("#courseAddNewBtnConfirm").html("Save");
                 if (response.status == 200) {
                     if (response.data) {
                         $("#addNewModal").modal("hide");
