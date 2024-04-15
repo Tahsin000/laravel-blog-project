@@ -4,32 +4,32 @@
  */
 function getCoursesData() {
     axios
-        .get("/admin/get-services-data")
+        .get("/admin/get-course-data")
         .then(function (response) {
             if (response.status) {
                 var data = response.data;
                 $("#order-listing").removeClass("d-none");
                 $("#loader").addClass("d-none");
-                $("#service_table").empty();
-                $.each(data, function (i, service) {
+                $("#course_table").empty();
+                $.each(data, function (i, course) {
                     $("<tr>")
                         .html(
                             `
-                            
-                            <td class="table-img"> <img 
-                            src="http://127.0.0.1:8000/${service.services_img}" class="img-sz" alt=""> </td>
-                    <td>${service.services_name}</td>
-                    <td>${service.services_des}</td>
-                    <td>
-                        <div> 
-                            <a href='' data-toggle='modal' data-id="${service.id}"
-                            class='service-edit-btn btn btn-outline-warning'><i class='fa fa-edit'></i></a>
-                            <a href='' data-toggle='modal' data-id="${service.id}"
-                            class='service-delete-btn btn btn-outline-danger'><i class='fa fa-trash'></i></a>    
-                        </div>
-                    </td>`
+                            <td>${course.course_name}</td>
+                            <td>${course.course_fee}</td>
+                            <td>${course.course_totalclass}</td>
+                            <td>${course.course_totalenroll}</td>
+                            <td><a href="" class="btn btn-outline-success"><i class="fa fa-eye"></i></a></td>
+                            <td>
+                                <div class="">
+                                    <a href="" class="btn btn-outline-warning"><i class="fa fa-edit"></i></a>
+                                    <a href="" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                                </div>
+                            </td>
+  
+                            `
                         )
-                        .appendTo("#service_table");
+                        .appendTo("#course_table");
                 });
 
                 $(".service-delete-btn").click(function () {
@@ -74,7 +74,7 @@ function getServicesDelete(deleteID) {
     // <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     $("#serviceDeleteBtnConfirm").html("<div class='spinner'></div>");
     axios
-        .post("/admin/services-delete", { id: deleteID })
+        .post("/admin/course-delete", { id: deleteID })
         .then(function (response) {
             $("#serviceDeleteBtnConfirm").html("Yes");
             if (response.status == 200) {
@@ -108,7 +108,7 @@ $("#serviceDeleteBtnConfirm").click(function () {
 
 function getServicesDetails(updateID) {
     axios
-        .post("/admin/services-details", { id: updateID })
+        .post("/admin/course-details", { id: updateID })
         .then(function (response) {
             if (response.data) {
                 var data = response.data;
@@ -141,7 +141,7 @@ function servicesUpdate(updateID, data) {
     } else {
         $("#serviceEditBtnConfirm").html("<div class='spinner'></div>");
         axios
-            .post("/admin/services-update", {
+            .post("/admin/course-update", {
                 id: updateID,
                 services_name: data?.name,
                 services_des: data?.des,
@@ -209,7 +209,7 @@ function insertServicesData(data) {
     } else {
         $("#serviceAddNewBtnConfirm").html("<div class='spinner'></div>");
         axios
-            .post("/admin/services-add-new", {
+            .post("/admin/course-add-new", {
                 services_name: name,
                 services_des: des,
                 services_img: img,

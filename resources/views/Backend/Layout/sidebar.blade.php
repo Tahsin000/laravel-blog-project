@@ -73,14 +73,14 @@
 
           <li class="nav-item">
             <a class="nav-link" href="{{route('dashboard.services')}}">
-              <i class="fa fa-puzzle-piece menu-icon"></i>
+              <i class="fa fa-briefcase menu-icon"></i>
               <span class="menu-title">Services</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" href="{{route('dashboard.course')}}">
-              <i class="fa fa-puzzle-piece menu-icon"></i>
+              <i class="fa fa-book menu-icon"></i>
               <span class="menu-title">Course</span>
             </a>
           </li>
