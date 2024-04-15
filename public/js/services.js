@@ -63,7 +63,7 @@ function getServicesData() {
         })
         .catch(function (error) {
             console.log(error);
-
+            $("#editModal").modal("hide");
             $("#loader").addClass("d-none");
             $("#wrongSection").removeClass("d-none");
         });
@@ -77,17 +77,23 @@ function getServicesDelete(deleteID) {
     axios
         .post("/admin/services-delete", { id: deleteID })
         .then(function (response) {
-            if (response.data == 1) {
-                getServicesData();
-                $("#deleteModal").modal("hide");
-                toastr.success("Delete Success");
+            if(response.status==200){
+                if (response.data == 1) {
+                    getServicesData();
+                    $("#deleteModal").modal("hide");
+                    toastr.success("Delete Success");
+                } else {
+                    getServicesData();
+                    toastr.error("Delete Failed");
+                    $("#deleteModal").modal("hide");
+                }
             } else {
-                getServicesData();
-                toastr.error("Delete Failed");
                 $("#deleteModal").modal("hide");
+                toastr.error("Some thing went wrong");
             }
         })
         .catch(function (error) {
+            $("#editModal").modal("hide");
             toastr.error("Internal server error");
             console.log(error);
         });
@@ -117,6 +123,7 @@ function getServicesDetails(updateID) {
             }
         })
         .catch(function (error) {
+            $("#editModal").modal("hide");
             toastr.error("Internal server error");
             console.log(error);
         });
@@ -140,16 +147,22 @@ function servicesUpdate(updateID, data) {
                 services_img: data?.img,
             })
             .then(function (response) {
-                if (response.data) {
-                    $("#editModal").modal("hide");
-                    getServicesData();
-                    toastr.success("Update successfully");
+                if(response.status==200){
+                    if (response.data) {
+                        $("#editModal").modal("hide");
+                        getServicesData();
+                        toastr.success("Update successfully");
+                    } else {
+                        $("#editModal").modal("hide");
+                        toastr.error("Update error");
+                    }
                 } else {
                     $("#editModal").modal("hide");
-                    toastr.error("Update error");
+                    toastr.error("Some thing went wrong");
                 }
             })
             .catch(function (error) {
+                $("#editModal").modal("hide");
                 toastr.error("Internal server error");
                 console.log(error);
             });
