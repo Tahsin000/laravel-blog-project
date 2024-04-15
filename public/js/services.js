@@ -74,10 +74,13 @@ function getServicesData() {
  * The function takes a single parameter which is the ID of the service to be deleted
  */
 function getServicesDelete(deleteID) {
+    // <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    $("#serviceDeleteBtnConfirm").html("<div class='spinner'></div>");
     axios
         .post("/admin/services-delete", { id: deleteID })
         .then(function (response) {
-            if(response.status==200){
+            $("#serviceDeleteBtnConfirm").html("Yes");
+            if (response.status == 200) {
                 if (response.data == 1) {
                     getServicesData();
                     $("#deleteModal").modal("hide");
@@ -102,7 +105,7 @@ function getServicesDelete(deleteID) {
 $("#serviceDeleteBtnConfirm").click(function () {
     // var id = $(this).data('id');
     const id = $("#serviceDeleteDisplayId").text();
-    $("#deleteModal").modal("hide");
+    // $("#deleteModal").modal("hide");
     id ? getServicesDelete(id) : "";
 });
 
@@ -139,6 +142,7 @@ function servicesUpdate(updateID, data) {
         toastr.error("service image is required");
         // toastr.error("Please enter service image");
     } else {
+        $("#serviceEditBtnConfirm").html("<div class='spinner'></div>");
         axios
             .post("/admin/services-update", {
                 id: updateID,
@@ -147,7 +151,8 @@ function servicesUpdate(updateID, data) {
                 services_img: data?.img,
             })
             .then(function (response) {
-                if(response.status==200){
+                $("#serviceEditBtnConfirm").html("Save");
+                if (response.status == 200) {
                     if (response.data) {
                         $("#editModal").modal("hide");
                         getServicesData();
