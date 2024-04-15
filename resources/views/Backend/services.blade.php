@@ -85,7 +85,7 @@
                         </table>
 
                         <div id="loader" class="w-100 loader-style "><img class=""
-                                src="{{ asset('images/loader.gif') }}" alt=""></div>
+                                src='{{ asset('images/loader.gif') }}' alt=""></div>
 
                         <div id="wrongSection" class="w-100 loader-style d-none">
                             <div class="display-4 text-danger">Something went wrong ... </div>

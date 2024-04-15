@@ -36,6 +36,7 @@ Route::namespace('admin')->prefix('admin')->group(function () {
     Route::post('/services-update', [ServicesController::class, 'servicesUpdate'])->name('dashboard.servicesDelete');
 
     Route::post('/services-add-new', [ServicesController::class, 'servicesAddNew'])->name('dashboard.servicesDelete');
+    
 });
 
 Route::get('/', [VisitorController::class, 'HomeIndex']);

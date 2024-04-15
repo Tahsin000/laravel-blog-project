@@ -14,23 +14,20 @@ function getServicesData() {
                 $.each(data, function (i, service) {
                     $("<tr>")
                         .html(
-                            "<td class='table-img'> <img src='" +
-                                "{{ asset('" +
-                                service.services_img +
-                                "') }}" +
-                                "' class='img-sz' >  </td>" +
-                                "<td>" +
-                                service.services_name +
-                                "</td>" +
-                                "<td>" +
-                                service.services_des +
-                                "</td>" +
-                                // data-toggle='modal' data-target='#deleteModal'
-                                "<td> <div> <a href='' data-toggle='modal' data-id=" +
-                                service.id +
-                                " class='service-edit-btn btn btn-outline-warning'><i class='fa fa-edit'></i></a> <a href='' data-toggle='modal' data-id=" +
-                                service.id +
-                                " class='service-delete-btn btn btn-outline-danger'><i class='fa fa-trash'></i></a> </div> </td>"
+                            `
+                            
+                            <td class="table-img"> <img 
+                            src="http://127.0.0.1:8000/${service.services_img}" class="img-sz" alt=""> </td>
+                    <td>${service.services_name}</td>
+                    <td>${service.services_des}</td>
+                    <td>
+                        <div> 
+                            <a href='' data-toggle='modal' data-id="${service.id}"
+                            class='service-edit-btn btn btn-outline-warning'><i class='fa fa-edit'></i></a>
+                            <a href='' data-toggle='modal' data-id="${service.id}"
+                            class='service-delete-btn btn btn-outline-danger'><i class='fa fa-trash'></i></a>    
+                        </div>
+                    </td>`
                         )
                         .appendTo("#service_table");
                 });

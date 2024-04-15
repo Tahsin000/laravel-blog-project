@@ -1,18 +1,18 @@
-<div class="container-fluid jumbotron mt-5 ">
+<div class="container section-marginTop text-center">
+    <h1 class="section-title">সার্ভিস সমূহ </h1>
+    <h1 class="section-subtitle">আইটি কোর্স, প্রজেক্ট ভিত্তিক সোর্স কোড সহ আরো যে সকল সার্ভিস আমরা প্রদান করি </h1>
     <div class="row">
-
-        <div class="col-md-6 justify-content-center">
-            <div class="m-lg-5 m-md-5 p-lg-5 m-sm-3 p-sm-3 p-md-5">
-                <h1 class="top-banner-title text-justify">সার্ভিস্ নিন আপনার সময় মত </h1>
-                <h1 class="top-banner-subtitle text-justify">প্রফেশনালদের কাছে শিখুন, প্রজেক্ট ভিত্তিক সোর্স কোড সংগ্রহ
-                    করুন </h1>
-                <h1 class="top-banner-subtitle2 text-justify">মোট সার্ভিস নিয়েছে ২০০ জন </h1>
-                <a target="_blank" href="https://www.youtube.com/@tahsinabrar275/videos"><img class=""
-                        src="images/playbtn.svg"></a>
+        @foreach ($servicesData as $servicesData)
+            <div class="col-md-3 p-2 ">
+                <div class="card service-card text-center w-100">
+                    <div class="card-body">
+                        <img class="service-card-logo " src="{{ $servicesData->services_img }}" alt="Card image cap">
+                        <h5 class="service-card-title mt-3">{{ $servicesData->services_name }}</h5>
+                        <h6 class="service-card-subTitle p-0 m-0">{{ $servicesData->services_des }} </h6>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <img class="top-banner-img  animated fadeIn" src="images/bannerImg.png">
-        </div>
+        @endforeach
+
     </div>
 </div>

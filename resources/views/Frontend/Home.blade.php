@@ -1,3 +1,7 @@
 @extends('Frontend.Layout.app')
-@extends('Frontend.Component.home-banner')
-@extends('Frontend.Component.home-service')
+@section('content')
+    {{-- home-service.blade --}}
+    @include('Frontend.Component.home-banner')
+    @include('Frontend.Component.home-service')
+    @include('Frontend.Component.home-course')
+@endsection
