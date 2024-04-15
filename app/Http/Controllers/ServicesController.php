@@ -37,4 +37,10 @@ class ServicesController extends Controller
         $data = $request->only(['id', 'services_name', 'services_des', 'services_img']);
         return ServicesModel::where('id', $data['id'])->update($data) !== false;
     }
+
+    public function servicesAddNew(Request $request)
+    {
+        $data = $request->only(['services_name', 'services_des', 'services_img']);
+        return ServicesModel::insert($data) ? 1 : 0;
+    }
 }

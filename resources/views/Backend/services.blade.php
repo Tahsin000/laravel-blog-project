@@ -55,9 +55,9 @@
     </div>
     <div class="card">
         <div class="card-body ">
-            <h4 class="card-title">Data table</h4>
             <div class="row">
                 <div class="col-12">
+                    <button class="btn btn-primary addServiceModal" >Add</button>
                     <div class="table-responsive">
                         <table id="order-listing" class="table d-none">
                             <thead>
@@ -151,6 +151,35 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Cancel</button>
                     <button data-id="" id="serviceEditBtnConfirm" type="button"
+                        class="btn btn-sm btn-success">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="addNewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add new service</h5>
+                </div>
+
+                <div id="addNewModalBody" class="modal-body p-5">
+                    <input type="text" id="serviceAddNewName" class="form-control mb-4" id=""
+                        placeholder="Service name">
+
+                    <input type="text" id="serviceAddNewDes" class="form-control mb-4" id=""
+                        placeholder="Service description">
+
+                    <input type="text" id="serviceAddNewImg" class="form-control mb-4" id=""
+                        placeholder="Service image link">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Cancel</button>
+                    <button data-id="" id="serviceAddNewBtnConfirm" type="button"
                         class="btn btn-sm btn-success">Save</button>
                 </div>
             </div>

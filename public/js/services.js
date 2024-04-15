@@ -185,3 +185,58 @@ $("#serviceEditBtnConfirm").click(function () {
           })
         : "";
 });
+
+$("#serviceAddNewBtnConfirm").click(function () {
+    const data = {
+        name: $("#serviceAddNewName").val(),
+        des: $("#serviceAddNewDes").val(),
+        img: $("#serviceAddNewImg").val(),
+    };
+    insertServicesData(data);
+});
+
+$(".addServiceModal").click(function () {
+    $("#addNewModal").modal("show");
+});
+
+function insertServicesData(data) {
+    const { name, des, img } = data;
+    if (name == 0) {
+        toastr.error("service name is required");
+    } else if (des == 0) {
+        toastr.error("service description is required");
+        // toastr.error("Please enter service description");
+    } else if (img == 0) {
+        toastr.error("service image is required");
+        // toastr.error("Please enter service image");
+    } else {
+        $("#serviceAddNewBtnConfirm").html("<div class='spinner'></div>");
+        axios
+            .post("/admin/services-add-new", {
+                services_name: name,
+                services_des: des,
+                services_img: img,
+            })
+            .then(function (response) {
+                $("#serviceAddNewBtnConfirm").html("Save");
+                if (response.status == 200) {
+                    if (response.data) {
+                        $("#addNewModal").modal("hide");
+                        getServicesData();
+                        toastr.success("Added successfully");
+                    } else {
+                        $("#addNewModal").modal("hide");
+                        toastr.error("Added error");
+                    }
+                } else {
+                    $("#addNewModal").modal("hide");
+                    toastr.error("Some thing went wrong");
+                }
+            })
+            .catch(function (error) {
+                $("#addNewModal").modal("hide");
+                toastr.error("Internal server error");
+                console.log(error);
+            });
+    }
+}
