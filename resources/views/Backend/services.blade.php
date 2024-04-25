@@ -188,7 +188,4 @@
 @endsection
 @section('admin-script')
     <script src="{{ asset('js/services.js') }}"></script>
-    <script>
-        getServicesData()
-    </script>
 @endsection

@@ -2,6 +2,8 @@
  * This function makes a GET request to the server to retrieve the
  * courses data
  */
+
+getCoursesData();
 function getCoursesData() {
     axios
         .get("/admin/get-course-data")
@@ -43,18 +45,18 @@ function getCoursesData() {
                     $("#courseDeleteBtnConfirm").attr("data-id", id);
                 });
 
-                $(".course-edit-btn").click(function () {
+                $(".course-preview-btn").click(function () {
                     var id = $(this).data("id");
-                    $("#editModal").modal("show");
+                    $("#coursePreviewModal").modal("show");
                     $("#coursePreviewDisplayId").html(id);
                     getCoursesPreview(id);
                 });
 
-                $(".course-preview-btn").click(function () {
+                $(".course-edit-btn").click(function () {
                     var id = $(this).data("id");
-                    $("#coursePreviewModal").modal("show");
-                    $("#courseEditDisplayId").html(id);
+                    $("#editModal").modal("show");
                     getCoursesDetails(id);
+                    $("#courseEditDisplayId").html(id);
                     $("#courseEditBtnConfirm").attr("data-id", id);
                 });
 
@@ -137,7 +139,6 @@ function getCoursesPreview(updateID) {
                     );
                     $("#coursePreviewLink").text(data[0]?.course_link);
                     $("#coursePreviewImg").text(data[0]?.course_img);
-                    $("#coursePreviewModal").modal("hide");
                 } else {
                     $("#coursePreviewModal").modal("hide");
                     toastr.error("Update error");

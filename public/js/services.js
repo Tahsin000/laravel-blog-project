@@ -2,7 +2,8 @@
  * This function makes a GET request to the server to retrieve the
  * services data
  */
-function getCoursesData() {
+getServicesData();
+function getServicesData() {
     axios
         .get("/admin/get-services-data")
         .then(function (response) {
@@ -15,19 +16,19 @@ function getCoursesData() {
                     $("<tr>")
                         .html(
                             `
-                            
-                            <td class="table-img"> <img 
-                            src="http://127.0.0.1:8000/${service.services_img}" class="img-sz" alt=""> </td>
-                    <td>${service.services_name}</td>
-                    <td>${service.services_des}</td>
-                    <td>
-                        <div> 
-                            <a href='' data-toggle='modal' data-id="${service.id}"
-                            class='service-edit-btn btn btn-outline-warning'><i class='fa fa-edit'></i></a>
-                            <a href='' data-toggle='modal' data-id="${service.id}"
-                            class='service-delete-btn btn btn-outline-danger'><i class='fa fa-trash'></i></a>    
-                        </div>
-                    </td>`
+                                
+                                <td class="table-img"> <img 
+                                src="http://127.0.0.1:8000/${service.services_img}" class="img-sz" alt=""> </td>
+                        <td>${service.services_name}</td>
+                        <td>${service.services_des}</td>
+                        <td>
+                            <div> 
+                                <a href='' data-toggle='modal' data-id="${service.id}"
+                                class='service-edit-btn btn btn-outline-warning'><i class='fa fa-edit'></i></a>
+                                <a href='' data-toggle='modal' data-id="${service.id}"
+                                class='service-delete-btn btn btn-outline-danger'><i class='fa fa-trash'></i></a>    
+                            </div>
+                        </td>`
                         )
                         .appendTo("#service_table");
                 });
@@ -79,11 +80,11 @@ function getServicesDelete(deleteID) {
             $("#serviceDeleteBtnConfirm").html("Yes");
             if (response.status == 200) {
                 if (response.data == 1) {
-                    getCoursesData();
+                    getServicesData();
                     $("#deleteModal").modal("hide");
                     toastr.success("Delete Success");
                 } else {
-                    getCoursesData();
+                    getServicesData();
                     toastr.error("Delete Failed");
                     $("#deleteModal").modal("hide");
                 }
@@ -152,7 +153,7 @@ function servicesUpdate(updateID, data) {
                 if (response.status == 200) {
                     if (response.data) {
                         $("#editModal").modal("hide");
-                        getCoursesData();
+                        getServicesData();
                         toastr.success("Update successfully");
                     } else {
                         $("#editModal").modal("hide");
@@ -189,14 +190,14 @@ $("#serviceAddNewBtnConfirm").click(function () {
         des: $("#serviceAddNewDes").val(),
         img: $("#serviceAddNewImg").val(),
     };
-    insertCoursesData(data);
+    insertServicesData(data);
 });
 
 $(".addServiceModal").click(function () {
     $("#addNewModal").modal("show");
 });
 
-function insertCoursesData(data) {
+function insertServicesData(data) {
     const { name, des, img } = data;
     if (name == 0) {
         toastr.error("service name is required");
@@ -219,7 +220,7 @@ function insertCoursesData(data) {
                 if (response.status == 200) {
                     if (response.data) {
                         $("#addNewModal").modal("hide");
-                        getCoursesData();
+                        getServicesData();
                         toastr.success("Added successfully");
                     } else {
                         $("#addNewModal").modal("hide");
