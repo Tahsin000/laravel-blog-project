@@ -38,6 +38,22 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* Custom styles for pagination buttons */
+.paginate_button {
+    display: inline-block !important;
+    padding: 8px 14px !important;
+    margin: 0 4px !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    line-height: 1.5 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+    cursor: pointer !important;
+    border-radius: 6px !important; /* Default border radius */
+}
+
     </style>
 @endsection
 
@@ -58,8 +74,8 @@
             <div class="row">
                 <div class="col-12">
                     <button class="btn btn-primary addCourseModal">Add</button>
-                    <div class="table-responsive">
-                        <table id="order-listing" class="table d-none">
+                    <div class="table-responsive  mt-3 ">
+                        <table id="order-listing" class="table d-none table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -182,7 +198,7 @@
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                
+
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add new course</h5>
                 </div>
@@ -220,7 +236,7 @@
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-        
+
                 <div class="modal-header">
 
                     <h5 class="modal-title" id="exampleModalLabel">Add new course</h5>
@@ -257,4 +273,5 @@
 @endsection
 @section('admin-script')
     <script src="{{ asset('js/course.js') }}"></script>
+    <!-- DataTables JS -->
 @endsection

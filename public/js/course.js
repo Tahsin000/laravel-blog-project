@@ -12,7 +12,9 @@ function getCoursesData() {
                 var data = response.data;
                 $("#order-listing").removeClass("d-none");
                 $("#loader").addClass("d-none");
+                $('#order-listing').DataTable().destroy();
                 $("#course_table").empty();
+
                 $.each(data, function (i, course) {
                     $("<tr>")
                         .html(
@@ -60,12 +62,11 @@ function getCoursesData() {
                     $("#courseEditBtnConfirm").attr("data-id", id);
                 });
 
-                // $(".course-delete-btn").click(function () {
-                //     $("#deleteModal").modal("show");
-                //     var id = $(this).data("id");
-                //     $("#courseDeleteDisplayId").html(id);
-                //     alert(id);
-                // });
+            //    dataTable
+                $('#order-listing').DataTable();
+                $('.dataTables_length').addClass('bs-select');
+
+
             } else {
                 $("#loader").addClass("d-none");
                 $("#wrongSection").removeClass("d-none");

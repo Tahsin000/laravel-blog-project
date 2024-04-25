@@ -11,7 +11,10 @@ function getServicesData() {
                 var data = response.data;
                 $("#order-listing").removeClass("d-none");
                 $("#loader").addClass("d-none");
+
+                $('#order-listing').DataTable().destroy();
                 $("#service_table").empty();
+
                 $.each(data, function (i, service) {
                     $("<tr>")
                         .html(
@@ -48,12 +51,9 @@ function getServicesData() {
                     $("#serviceEditBtnConfirm").attr("data-id", id);
                 });
 
-                // $(".service-delete-btn").click(function () {
-                //     $("#deleteModal").modal("show");
-                //     var id = $(this).data("id");
-                //     $("#serviceDeleteDisplayId").html(id);
-                //     alert(id);
-                // });
+                
+                $('#order-listing').DataTable();
+                $('.dataTables_length').addClass('bs-select');
             } else {
                 $("#loader").addClass("d-none");
                 $("#wrongSection").removeClass("d-none");

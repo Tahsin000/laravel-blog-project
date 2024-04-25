@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('css/vendor.bundle.addons.css') }}">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
     <!-- endinject -->
     <!-- plugin css for this page -->
     <!-- End plugin css for this page -->
