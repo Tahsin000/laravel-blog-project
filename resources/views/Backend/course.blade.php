@@ -133,8 +133,8 @@
             <div class="modal-content">
 
                 <div class="modal-body">
-                    <h6>Do you really want to delete this ?</h6>
-                    <h6 id="courseDeleteDisplayId"></h6>
+                    <h5>Do you really want to delete this ?</h5>
+                    <h6 class="d-none" id="courseDeleteDisplayId"></h6>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">No</button>
@@ -150,8 +150,12 @@
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update course</h5>
+                </div>
+
                 <div id="editModalBody" class="modal-body p-5 d-none">
-                    <h6 id="courseEditDisplayId"></h6>
+                    <h6 class="d-none" id="courseEditDisplayId"></h6>
                     <input type="text" id="courseEditName" class="form-control mb-4" id=""
                         placeholder="Course name">
 
@@ -239,11 +243,11 @@
 
                 <div class="modal-header">
 
-                    <h5 class="modal-title" id="exampleModalLabel">Add new course</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Preview course</h5>
                 </div>
 
                 <div id="coursePreviewModalBody" class="modal-body p-5 d-none">
-                    <h6 id="coursePreviewDisplayId"></h6>
+                    <h6 class="d-none" id="coursePreviewDisplayId"></h6>
 
                     <p type="text" id="coursePreviewName" class="form-control mb-4"></p>
 

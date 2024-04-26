@@ -59,7 +59,7 @@
                 <div class="col-12">
                     <button class="btn btn-primary addServiceModal" >Add</button>
                     <div class="table-responsive">
-                        <table id="order-listing" class="table d-none">
+                        <table id="order-listing" class="table d-none table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>Image</th>
@@ -109,8 +109,8 @@
             <div class="modal-content">
 
                 <div class="modal-body">
-                    <h6>Do you really want to delete this ?</h6>
-                    <h6 id="serviceDeleteDisplayId"></h6>
+                    <h5>Do you really want to delete this ?</h5>
+                    <h6 class="d-none" id="serviceDeleteDisplayId"></h6>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">No</button>
@@ -126,8 +126,11 @@
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update service</h5>
+                </div>
                 <div id="editModalBody" class="modal-body p-5 d-none">
-                    <h6 id="serviceEditDisplayId"></h6>
+                    <h6 class="d-none" id="serviceEditDisplayId"></h6>
                     <input type="text" id="serviceEditName" class="form-control mb-4" id=""
                         placeholder="Service name">
 

@@ -14,7 +14,7 @@ class CourseController extends Controller
     }
     public function getCourseData()
     {
-        $result = json_decode(CourseModel::all());
+        $result = json_decode(CourseModel::orderBy('id', 'desc')->get());
         return $result;
     }
 

@@ -63,7 +63,7 @@ function getCoursesData() {
                 });
 
             //    dataTable
-                $('#order-listing').DataTable();
+                $('#order-listing').DataTable({"order":false});
                 $('.dataTables_length').addClass('bs-select');
 
 

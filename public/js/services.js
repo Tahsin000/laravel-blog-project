@@ -52,7 +52,7 @@ function getServicesData() {
                 });
 
                 
-                $('#order-listing').DataTable();
+                $('#order-listing').DataTable({"order": false});
                 $('.dataTables_length').addClass('bs-select');
             } else {
                 $("#loader").addClass("d-none");
