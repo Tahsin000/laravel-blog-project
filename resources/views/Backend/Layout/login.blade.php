@@ -19,12 +19,8 @@
 
 
     <div class="container-scroller">
-
-        @include('Frontend.Layout.menu')
         
         @yield('content')
-
-        @include('Frontend.Layout.footer')
 
         <!-- main-panel ends -->
     </div>
@@ -41,6 +37,8 @@
 <script type="text/javascript" src="{{asset('js/axios.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/toastr.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/custom.js')}}"></script>
+@yield('script')
+
 </body>
 
 </html>

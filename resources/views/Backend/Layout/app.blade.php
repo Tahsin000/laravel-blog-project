@@ -75,7 +75,6 @@
     <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
 
-
     @yield('admin-script')
 </body>
 
